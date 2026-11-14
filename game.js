@@ -89,16 +89,23 @@ function initGame() {
 function runTurn() {
     if (currentTurn >= MAX_TURNS) { endGame(); return; }
     
-    // Simple execution
+    // Execute Player 1
     try {
         let a1 = state.p1Func({ myShips: state.p1.ships, myMacros: state.p1.macros });
-        if (a1 && a1.command === "move") state.p1.ships[0].x = Math.max(0, Math.min(GRID_SIZE - 1, a1.x));
-    } catch(e) {}
+        if (a1 && a1.command === "move") {
+            state.p1.ships[0].x = Math.max(0, Math.min(GRID_SIZE - 1, a1.x));
+            state.p1.ships[0].y = Math.max(0, Math.min(GRID_SIZE - 1, a1.y));
+        }
+    } catch(e) { console.error("Player 1 Script Error:", e); }
 
+    // Execute Player 2
     try {
         let a2 = state.p2Func({ myShips: state.p2.ships, myMacros: state.p2.macros });
-        if (a2 && a2.command === "move") state.p2.ships[0].x = Math.max(0, Math.min(GRID_SIZE - 1, a2.x));
-    } catch(e) {}
+        if (a2 && a2.command === "move") {
+            state.p2.ships[0].x = Math.max(0, Math.min(GRID_SIZE - 1, a2.x));
+            state.p2.ships[0].y = Math.max(0, Math.min(GRID_SIZE - 1, a2.y));
+        }
+    } catch(e) { console.error("Player 2 Script Error:", e); }
 
     currentTurn++;
     draw();
