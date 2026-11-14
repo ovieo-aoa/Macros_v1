@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macro Wars</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <h1>Loading Macro Wars...</h1>
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Home Menu -->
+    <div id="home-screen" class="hidden">
+        <h1>Macro Wars</h1>
+        <button id="btn-play">Play Game</button>
+        <button id="btn-tutorials">Tutorials</button>
+    </div>
+
+    <!-- Tutorials Screen -->
+    <div id="tutorials-screen" class="hidden">
+        <h1>Tutorials: JavaScript Basics</h1>
+        <div class="tutorial-content">
+            <p>Welcome to Macro Wars! You will write your bot logic in JavaScript.</p>
+            <h3>1. The Return Statement</h3>
+            <p>Your script must return an action object every turn: <br><code>return { command: "move", x: 5, y: 5 };</code></p>
+            <h3>2. Accessing Game State</h3>
+            <p>Use <code>gameState.myShips[0]</code> to find your ship. Use <code>gameState.myMacros</code> to check your bank.</p>
+            <h3>3. If Statements</h3>
+            <p>Make decisions: <br><code>if (gameState.myMacros > 5) { return { command: "attack" }; }</code></p>
+        </div>
+        <button id="btn-back-home">Back to Menu</button>
+    </div>
+
+    <!-- Map Selection Screen -->
+    <div id="map-select-screen" class="hidden">
+        <h1>Select Theme</h1>
+        <button class="theme-btn" data-theme="space">Space</button>
+        <button class="theme-btn" data-theme="underwater">Underwater</button>
+        <button class="theme-btn" data-theme="desert">Desert</button>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="hidden">
+        <div class="header">
+            <h2 id="theme-title">Game Arena</h2>
+            <button id="start-btn">Run Match</button>
+            <button id="btn-back-map">Back to Maps</button>
+            <div id="status">Status: Waiting to start...</div>
+        </div>
+
+        <div class="container">
+            <div class="editor-panel">
+                <h3>Player 1 Code</h3>
+                <textarea id="p1-code">return { command: "move", x: gameState.myShips[0].x + 1, y: gameState.myShips[0].y };</textarea>
+            </div>
+
+            <div class="game-panel">
+                <canvas id="gameCanvas" width="450" height="450"></canvas>
+            </div>
+
+            <div class="editor-panel">
+                <h3>Player 2 Code</h3>
+                <textarea id="p2-code">return { command: "move", x: gameState.myShips[0].x - 1, y: gameState.myShips[0].y };</textarea>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
